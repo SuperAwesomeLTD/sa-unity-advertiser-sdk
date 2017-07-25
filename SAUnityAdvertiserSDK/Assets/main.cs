@@ -8,7 +8,7 @@ public class main : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		SACPI.getInstance ().handleInstall ((success) => {
+		SuperAwesomeAdvertiser.getInstance ().handleInstall ((success) => {
 			Debug.Log ("Handled install " + success);
 		});
 

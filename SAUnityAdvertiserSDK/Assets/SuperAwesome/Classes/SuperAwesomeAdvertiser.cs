@@ -10,11 +10,11 @@ using System;
 namespace SuperAwesome {
 
 	// main class
-	public class SACPI : MonoBehaviour {
+	public class SuperAwesomeAdvertiser : MonoBehaviour {
 
 #if (UNITY_IPHONE && !UNITY_EDITOR)
 		[DllImport ("__Internal")]
-		private static extern void SuperAwesomeUnitySACPIHandleCPI ();
+		private static extern void SuperAwesomeAdvertiserUnitySACPIHandleInstall ();
 #endif
 
 		// define a default callback so that it's never null and I don't have
@@ -22,14 +22,14 @@ namespace SuperAwesome {
 		private static Action<bool>	installCallback = (p) => {};
 
 		// a private instance
-		private static SACPI sharedInstance = null;
+		private static SuperAwesomeAdvertiser sharedInstance = null;
 
-		public static SACPI getInstance () {
+		public static SuperAwesomeAdvertiser getInstance () {
 
 			if (sharedInstance == null) {
 				GameObject obj = new GameObject ();
-				sharedInstance = obj.AddComponent<SACPI> ();
-				sharedInstance.name = "SACPI";
+				sharedInstance = obj.AddComponent<SuperAwesomeAdvertiser> ();
+				sharedInstance.name = "SuperAwesomeAdvertiser";
 				DontDestroyOnLoad (sharedInstance);
 			}
 
@@ -43,7 +43,7 @@ namespace SuperAwesome {
 
 #if (UNITY_IPHONE && !UNITY_EDITOR)
 
-			SACPI.SuperAwesomeUnitySACPIHandleCPI ();
+			SuperAwesomeAdvertiser.SuperAwesomeAdvertiserUnitySACPIHandleInstall ();
 
 #elif (UNITY_ANDROID && !UNITY_EDITOR)
 
@@ -51,8 +51,8 @@ namespace SuperAwesome {
 			var context = unityClass.GetStatic<AndroidJavaObject> ("currentActivity");
 
 			context.Call("runOnUiThread", new AndroidJavaRunnable(() => {
-			var saplugin = new AndroidJavaClass ("tv.superawesome.plugins.unity.SAUnityCPI");
-			saplugin.CallStatic("SuperAwesomeUnitySACPIHandleCPI", context);
+			var saplugin = new AndroidJavaClass ("tv.superawesomeadvertiser.plugins.unity.SAdvUnitySuperAwesomeAdvertiser");
+			saplugin.CallStatic("SuperAwesomeAdvertiserUnitySACPIHandleInstall", context);
 			}));
 
 #else
@@ -91,7 +91,7 @@ namespace SuperAwesome {
 			}
 
 			switch (type) {
-			case "sacallback_HandleCPI": installCallback (success); break;
+			case "sacallback_HandleInstall": installCallback (success); break;
 			}
 		}
 	}
