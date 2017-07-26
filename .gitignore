@@ -36,3 +36,5 @@ sysinfo.txt
 /SAUnityAdvertiserSDK/ProjectSettings/*
 /SAUnityAdvertiserSDK/Temp
 /SAUnityAdvertiserSDK/obj
+demo/Library/
+demo/Temp/
